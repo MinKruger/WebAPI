@@ -12,7 +12,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using WebAPI.Infrastructure.Data;
-
+using WebAPI.Core.Repositories;
+using WebAPI.Infrastructure.Repositories;
+using Microsoft.OpenApi.Models;
 
 namespace WebAPI
 {
@@ -32,6 +34,13 @@ namespace WebAPI
 
             services.AddDbContext<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("connectionString")));
 
+            services.AddScoped(typeof(DbContext), typeof(DataContext));
+            services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
+
+             services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Web Api", Version = "v1" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +52,12 @@ namespace WebAPI
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Kawasaki API V1");
+            });
 
             app.UseRouting();
 
