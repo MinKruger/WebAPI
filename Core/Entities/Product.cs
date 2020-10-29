@@ -1,6 +1,6 @@
 namespace WebAPI.Core.Entities
 {
-    public abstract class Product : EntityBase
+    public class Product : EntityBase
     {
         public string Name { get; set; }
         public string Description { get; set; }

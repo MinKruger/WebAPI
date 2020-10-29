@@ -1,6 +1,6 @@
 namespace WebAPI.Core.Entities
 {
-    public abstract class Item : EntityBase
+    public class Item : EntityBase
     {
         public int SaleId { get; set; }
         public int ProductId { get; set; }

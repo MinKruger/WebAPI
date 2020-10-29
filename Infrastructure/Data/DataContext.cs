@@ -6,14 +6,14 @@ namespace WebAPI.Infrastructure.Data
 {
     public class DataContext : DbContext
     {
+        public DbSet<HeadOffice> HeadOffice { get; set; }
+        public DbSet<Client> Client { get; set; }
+        public DbSet<Product> Product { get; set; }
+        public DbSet<Sale> Sale { get; set; }
+        public DbSet<Item> Item { get; set; }
+
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         { }
-
-        public DbSet<HeadOffice> HeadOffices { get; set; }
-        public DbSet<Client> Clients { get; set; }
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Sale> Sales { get; set; }
-        public DbSet<Item> Items { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,5 @@ namespace WebAPI.Infrastructure.Data
 
             base.OnModelCreating(modelBuilder);
         }
-    
     }
 }

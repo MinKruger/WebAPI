@@ -1,6 +1,6 @@
 namespace WebAPI.Core.Entities
 {
-    public abstract class Sale : EntityBase
+    public class Sale : EntityBase
     {
         public decimal TotalValue { get; set; }
         public int ClientId { get; set; }

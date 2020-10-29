@@ -1,6 +1,6 @@
 namespace WebAPI.Core.Entities
 {
-    public abstract class Client : EntityBase
+    public class Client : EntityBase
     {
         public string Name { get; set; }
         public int HeadOfficeId { get; set; }
