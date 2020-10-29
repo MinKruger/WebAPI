@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -19,8 +20,46 @@ namespace WebAPI.Controllers
         [Route("")]
         public async Task<ActionResult<List<Sale>>> Get()
         {            
-            var items = await _repository.GetAll();
-            return Ok(items);
+            var sales = await _repository.GetAll();
+            return Ok(sales);
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<ActionResult<List<Sale>>> GetByHeadOffice(int id)
+        {            
+            var sales = await _repository.FindBy(x => x.HeadOfficeId == id);
+            return Ok(sales);
+        }
+
+        [HttpPost]
+        [Route("")]
+        public async Task<ActionResult> Post([FromBody]Sale sale)
+        {
+            if (sale == null)
+                throw new ArgumentNullException(nameof(sale));
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            await _repository.Add(sale);
+
+            return Ok();
+        }
+
+        [HttpPut]
+        [Route("{id:int}")]
+        public async Task<ActionResult> Put(int id, [FromBody]Sale sale)
+        {
+            if (sale == null)
+                throw new ArgumentNullException(nameof(sale));
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            await _repository.Update(sale);
+            
+            return Ok();
         }
     }
 }

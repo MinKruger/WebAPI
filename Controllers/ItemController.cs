@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,29 @@ namespace WebAPI.Controllers
         {            
             var items = await _repository.GetAll();
             return Ok(items);
+        }
+
+        [HttpGet]
+        [Route("{id:int}")]
+        public async Task<ActionResult<List<Item>>> GetBySale(int id)
+        {            
+            var items = await _repository.FindBy(x => x.SaleId == id);
+            return Ok(items);
+        }
+
+        [HttpPost]
+        [Route("")]
+        public async Task<ActionResult> Post([FromBody]Item item)
+        {
+            if (item == null)
+                throw new ArgumentNullException(nameof(item));
+
+            if (!ModelState.IsValid)
+                return BadRequest();
+
+            await _repository.Add(item);
+
+            return Ok();
         }
     }
 }
