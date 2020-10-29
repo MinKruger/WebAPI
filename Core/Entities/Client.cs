@@ -4,6 +4,5 @@ namespace WebAPI.Core.Entities
     {
         public string Name { get; set; }
         public int HeadOfficeId { get; set; }
-        public virtual HeadOffice HeadOffice { get; set; }
     }
 }
