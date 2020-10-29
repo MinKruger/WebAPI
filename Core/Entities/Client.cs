@@ -1,4 +1,4 @@
-namespace WebAPI.Models
+namespace WebAPI.Core.Entities
 {
     public abstract class Client : EntityBase
     {
