@@ -4,8 +4,6 @@
 
 Trabalho realizado para a atividade avaliativa sobre Web Services da matéria Programação Distríbuida e Concorrente, a fim de construir um Sistema de Comunicação de Multinacionais e suas Sedes Locais.
 
----
-
 ## Instalação
 
 Foi utilizado o SQL Server e .NET Framework para o desenvolvimento desta API.
@@ -34,7 +32,6 @@ O servidor inciará na porta:5001 - acesse utilizando http://localhost:5001/
 Foi implementado o Swagger para melhor documentação da API.
 Para utilizar acesse utilizando http://localhost:5001/swagger
 
----
 
 ## Licença
 
