@@ -15,6 +15,7 @@ using WebAPI.Infrastructure.Data;
 using WebAPI.Core.Repositories;
 using WebAPI.Infrastructure.Repositories;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.ResponseCompression;
 
 namespace WebAPI
 {
@@ -31,6 +32,13 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors();
+
+            services.AddResponseCompression(options =>
+            {
+                options.Providers.Add<GzipCompressionProvider>();
+                options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[] { "application/json" });
+            });
 
             services.AddDbContext<DataContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("connectionString")));
 
@@ -41,6 +49,12 @@ namespace WebAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Web Api", Version = "v1" });
             });
+
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -15,6 +15,11 @@ namespace WebAPI.Infrastructure.Data
         public DbSet<Sale> Sale { get; set; }
         public DbSet<Item> Item { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             if (modelBuilder == null)
@@ -25,6 +30,8 @@ namespace WebAPI.Infrastructure.Data
             modelBuilder.Entity<Product>().ToTable("Product");
             modelBuilder.Entity<Sale>().ToTable("Sale");
             modelBuilder.Entity<Item>().ToTable("Item");
+
+            modelBuilder.Entity<Item>().HasOne<Sale>(s => s.Sale).WithMany(i => i.Items).OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
         }
