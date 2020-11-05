@@ -46,5 +46,18 @@ namespace WebAPI.Controllers
 
             return Ok();
         }
+
+        [HttpDelete]
+        [Route("{id:int}")]
+        public async Task<ActionResult<List<Item>>> Delete(int id)
+        {
+            var item = await _repository.GetById(id);
+
+            if (item == null)
+                throw new ArgumentNullException(nameof(item));
+
+            await _repository.Remove(item);
+            return Ok();
+        }
     }
 }
