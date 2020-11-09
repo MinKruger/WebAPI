@@ -36,7 +36,7 @@ namespace WebAPI.Controllers
 
             await _repository.Add(headOffice);
 
-            return Ok();
+            return Ok(headOffice);
         }
 
         [HttpPut]
@@ -51,7 +51,7 @@ namespace WebAPI.Controllers
 
             await _repository.Update(headOffice);
             
-            return Ok();
+            return Ok(headOffice);
         }
 
         [HttpDelete]

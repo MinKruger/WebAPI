@@ -44,7 +44,7 @@ namespace WebAPI.Controllers
 
             await _repository.Add(client);
 
-            return Ok();
+            return Ok(client);
         }
 
         [HttpPut]
@@ -59,7 +59,7 @@ namespace WebAPI.Controllers
 
             await _repository.Update(client);
             
-            return Ok();
+            return Ok(client);
         }
 
         [HttpDelete]

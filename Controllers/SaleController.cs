@@ -26,6 +26,14 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
+        public async Task<ActionResult<List<Sale>>> GetById(int id)
+        {            
+            var sales = await _repository.GetById(id);
+            return Ok(sales);
+        }
+
+        [HttpGet]
+        [Route("HeadOffice/{id:int}")]
         public async Task<ActionResult<List<Sale>>> GetByHeadOffice(int id)
         {            
             var sales = await _repository.FindBy(x => x.HeadOfficeId == id);

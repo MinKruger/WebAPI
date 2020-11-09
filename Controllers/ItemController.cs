@@ -44,7 +44,7 @@ namespace WebAPI.Controllers
 
             await _repository.Add(item);
 
-            return Ok();
+            return Ok(item);
         }
 
         [HttpDelete]

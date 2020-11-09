@@ -36,7 +36,7 @@ namespace WebAPI.Controllers
 
             await _repository.Add(product);
 
-            return Ok();
+            return Ok(product);
         }
 
         [HttpPut]
@@ -51,7 +51,7 @@ namespace WebAPI.Controllers
 
             await _repository.Update(product);
             
-            return Ok();
+            return Ok(product);
         }
 
         [HttpDelete]
